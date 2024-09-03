@@ -476,39 +476,53 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
     templatePremium: ('1' === '1'),
     bgMusic: 'https://youtu.be/nlNgMqZ26UY',
     autoMusic: true
-  };
+};
 
-  // Thêm YouTube IFrame API
-  var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// Thêm YouTube IFrame API
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  // Khai báo biến player để sử dụng cho YouTube API
-  var player;
-  function onYouTubeIframeAPIReady() {
+var player;
+function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-      height: '0',   // Chiều cao ẩn
-      width: '0',    // Chiều rộng ẩn
-      videoId: 'nlNgMqZ26UY', // ID video trên YouTube
-      playerVars: {
-        'autoplay': 1,  // Tự động phát
-        'controls': 0,  // Ẩn điều khiển
-        'loop': 1,      // Lặp lại
-        'playlist': 'nlNgMqZ26UY' // Để lặp lại video
-      },
-      events: {
-        'onReady': onPlayerReady
-      }
+        height: '0',
+        width: '0',
+        videoId: 'nlNgMqZ26UY',
+        playerVars: {
+            'autoplay': 1,
+            'controls': 0,
+            'loop': 1,
+            'playlist': 'nlNgMqZ26UY'
+        },
+        events: {
+            'onReady': onPlayerReady
+        }
     });
-  }
+}
 
-  // Chạy nhạc khi người dùng tương tác
-  function onPlayerReady(event) {
+function onPlayerReady(event) {
     document.body.addEventListener('click', function() {
-      event.target.playVideo();
+        event.target.playVideo();
     });
-  }
+}
+
+function toggleVolume() {
+    var volumeOn = document.getElementById('playerVolumeOn');
+    var volumeOff = document.getElementById('playerVolumeOff');
+    
+    if (player.isMuted()) {
+        player.unMute();
+        volumeOn.style.display = 'block';
+        volumeOff.style.display = 'none';
+    } else {
+        player.mute();
+        volumeOn.style.display = 'none';
+        volumeOff.style.display = 'block';
+    }
+}
+
 </script>
 
     <script src="js/1.js"></script>
