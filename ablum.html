@@ -468,14 +468,49 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
     </div>
     </div>
 
-    <script type="text/javascript">
-      const biicore = {
-        effect: JSON.parse('{\"type\":\"custom\",\"setting\":{\"icon\":\"https:\\/\\/cdn.biihappy.com\\/ziiweb\\/wedding-snows\\/22.png\",\"number\":\"50\",\"speed\":\"2\",\"minSize\":\"20\",\"maxSize\":\"40\"}}'),
-        templatePremium: ('1' === '1'),
-        bgMusic: 'https://cdn.biihappy.com/ziiweb/wedding-musics/Perfect-EdSheeran-6445593.mp3',
-        autoMusic: true
-      };
-    </script>
+    <div id="player"></div>
+
+<script type="text/javascript">
+  const biicore = {
+    effect: JSON.parse('{"type":"custom","setting":{"icon":"https://cdn.biihappy.com/ziiweb/wedding-snows/22.png","number":"50","speed":"2","minSize":"20","maxSize":"40"}}'),
+    templatePremium: ('1' === '1'),
+    bgMusic: 'https://youtu.be/nlNgMqZ26UY',
+    autoMusic: true
+  };
+
+  // Thêm YouTube IFrame API
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Khai báo biến player để sử dụng cho YouTube API
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '0',   // Chiều cao ẩn
+      width: '0',    // Chiều rộng ẩn
+      videoId: 'nlNgMqZ26UY', // ID video trên YouTube
+      playerVars: {
+        'autoplay': 1,  // Tự động phát
+        'controls': 0,  // Ẩn điều khiển
+        'loop': 1,      // Lặp lại
+        'playlist': 'nlNgMqZ26UY' // Để lặp lại video
+      },
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
+
+  // Chạy nhạc khi người dùng tương tác
+  function onPlayerReady(event) {
+    document.body.addEventListener('click', function() {
+      event.target.playVideo();
+    });
+  }
+</script>
+
     <script src="js/1.js"></script>
     <script src="js/2.js"></script>
     <script src="js/3.js"></script>
