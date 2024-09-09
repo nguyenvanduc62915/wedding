@@ -477,32 +477,43 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           bgMusic: 'media.mp3', // Thay đổi thành tệp âm thanh MP3
           autoMusic: true
       };
-
+  
       var audio = new Audio(biicore.bgMusic);
       var isPlaying = false;
-      
-      // Tự động phát nhạc khi trang tải xong
-      if (biicore.autoMusic) {
-          audio.loop = true;
+      var hasPlayedOnce = false; // Cờ kiểm tra đã phát một lần chưa
+  
+      function setupAudio() {
+          audio.loop = false; // Tắt lặp lại
           audio.volume = 0; // Bắt đầu với âm lượng tắt
-          audio.play();
-          isPlaying = true;
+  
+          audio.addEventListener('ended', function() {
+              hasPlayedOnce = true; // Đánh dấu đã phát một lần
+          });
+  
+          if (biicore.autoMusic) {
+              audio.play();
+              isPlaying = true;
+          }
       }
-      
+  
       // Xử lý sự kiện click để phát/tạm dừng nhạc
       document.body.addEventListener('click', function() {
           playPause();
       });
-
+  
       function playPause() {
           if (isPlaying) {
               audio.pause();
           } else {
+              // Nếu chưa phát bao giờ hoặc đã phát xong, khởi động lại
+              if (!hasPlayedOnce) {
+                  setupAudio();
+              }
               audio.play();
           }
           isPlaying = !isPlaying;
       }
-
+  
       function toggleVolume() {
           if (audio.volume === 0) {
               audio.volume = 1; // Đặt âm lượng mặc định
@@ -511,7 +522,7 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           }
       }
   </script>
-
+  
     <script src="js/1.js"></script>
     <script src="js/2.js"></script>
     <script src="js/3.js"></script>
