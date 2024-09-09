@@ -472,69 +472,45 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
 
     <script type="text/javascript">
       const biicore = {
-        effect: JSON.parse('{"type":"custom","setting":{"icon":"https://cdn.biihappy.com/ziiweb/wedding-snows/22.png","number":"50","speed":"2","minSize":"20","maxSize":"40"}}'),
-        templatePremium: ('1' === '1'),
-        bgMusic: 'https://youtu.be/BnfaIDwb-y0',
-        autoMusic: true
-    };
-    
-    // Load YouTube IFrame API
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    
-    var player;
-    var isPlaying = false;  // Track the play/pause state
-    
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '360',
-            width: '640',
-            videoId: 'BnfaIDwb-y0',
-            playerVars: {
-                'autoplay': 1,
-                'controls': 0,
-                'loop': 1,
-                'playlist': 'BnfaIDwb-y0',
-                'mute': 1  // Initially mute the video
-            },
-            events: {
-                'onReady': onPlayerReady
-            }
-        });
-    }
-    
-    function onPlayerReady(event) {
-        document.body.addEventListener('click', function() {
-            playPause();
-        });
-    }
-    
-    function playPause() {
-        if (isPlaying) {
-            player.pauseVideo();
-        } else {
-            player.playVideo();
-        }
-        isPlaying = !isPlaying;
-    }
-    
-    function toggleVolume() {
-        var volumeOn = document.getElementById('playerVolumeOn');
-        var volumeOff = document.getElementById('playerVolumeOff');
-        
-        if (player.isMuted()) {
-            player.unMute();
-            volumeOn.style.display = 'block';
-            volumeOff.style.display = 'none';
-        } else {
-            player.mute();
-            volumeOn.style.display = 'none';
-            volumeOff.style.display = 'block';
-        }
-    }
-    </script>
+          effect: JSON.parse('{"type":"custom","setting":{"icon":"https://cdn.biihappy.com/ziiweb/wedding-snows/22.png","number":"50","speed":"2","minSize":"20","maxSize":"40"}}'),
+          templatePremium: ('1' === '1'),
+          bgMusic: 'media.mp3', // Thay đổi thành tệp âm thanh MP3
+          autoMusic: true
+      };
+
+      var audio = new Audio(biicore.bgMusic);
+      var isPlaying = false;
+      
+      // Tự động phát nhạc khi trang tải xong
+      if (biicore.autoMusic) {
+          audio.loop = true;
+          audio.volume = 0; // Bắt đầu với âm lượng tắt
+          audio.play();
+          isPlaying = true;
+      }
+      
+      // Xử lý sự kiện click để phát/tạm dừng nhạc
+      document.body.addEventListener('click', function() {
+          playPause();
+      });
+
+      function playPause() {
+          if (isPlaying) {
+              audio.pause();
+          } else {
+              audio.play();
+          }
+          isPlaying = !isPlaying;
+      }
+
+      function toggleVolume() {
+          if (audio.volume === 0) {
+              audio.volume = 1; // Đặt âm lượng mặc định
+          } else {
+              audio.volume = 0; // Tắt âm lượng
+          }
+      }
+  </script>
 
     <script src="js/1.js"></script>
     <script src="js/2.js"></script>
