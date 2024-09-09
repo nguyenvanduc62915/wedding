@@ -486,8 +486,10 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           audio.loop = false; // Tắt lặp lại
           audio.volume = 0; // Bắt đầu với âm lượng tắt
   
+          // Đảm bảo chỉ khởi tạo sự kiện khi âm thanh chưa được phát
           audio.addEventListener('ended', function() {
               hasPlayedOnce = true; // Đánh dấu đã phát một lần
+              audio.currentTime = 0; // Đặt lại thời gian phát về đầu
           });
   
           if (biicore.autoMusic) {
@@ -522,7 +524,7 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           }
       }
   </script>
-  
+
     <script src="js/1.js"></script>
     <script src="js/2.js"></script>
     <script src="js/3.js"></script>
