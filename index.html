@@ -31,6 +31,53 @@
                 background-position: 0% 50%;
             }
         }
+
+        .actions .link.btn {
+            position: relative;
+            margin: 10px;
+            /* Remove any existing border styles to ensure compatibility */
+            border: none;
+            /* Add padding to account for the new outer border */
+            padding: 12px 22px;
+        }
+
+        .actions .link.btn::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #ffd700, #00ff00, #ffd700, #00ff00);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: shimmer 6s linear infinite;
+            border-radius: 5px; /* Adjust if your buttons have rounded corners */
+        }
+
+        .actions .link.btn::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: #fff; /* Or match your button's background color */
+            z-index: -1;
+            border-radius: 3px; /* Slightly smaller than the outer border */
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     </style>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
