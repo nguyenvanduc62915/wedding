@@ -3,15 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Mai Lan &#10084; Xuân Trọng</title>
+    <title>Xuân Trọng &#10084; Mai Lan</title>
     <link rel="icon" href="images/info/title.jpg" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Mai Lan &amp; Xuân Trọng - Our wedding date: 2024-07-21 | Khi còn trẻ chúng ta dành cho nhau cả thanh xuân ... Khi về già chúng ta dành cho nhau cả cuộc đời ...">
     <meta name="format-detection" content="telephone=no">
-    <meta property="og:site_name" content="Mai Lan &amp; Xuân Trọng">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Mai Lan &amp; Xuân Trọng Wedding">
-    <meta property="og:description" content="Mai Lan &amp; Xuân Trọng - Our wedding date: 2024-07-21 | Khi còn trẻ chúng ta dành cho nhau cả thanh xuân ... Khi về già chúng ta dành cho nhau cả cuộc đời ...">
     <link href="https://fonts.googleapis.com/css2?family=Texturina:opsz,wght@12..72,100&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"  rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Bellota+Text&display=swap" rel="stylesheet" />
@@ -55,7 +50,7 @@
             </div>
             <img class="bg-title" src="images/info/bg-title.png" alt="" />
             <div class="wrap-name pt-7 px-5 title">
-              Mai Lan <small>&amp;</small> Xuân Trọng
+              Xuân Trọng <small>&amp;</small> Mai Lan
             </div>
           </div>
         </div>
@@ -431,7 +426,7 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
       <section class="section-title footer-section py-5 text-center section-bg-affect">
         <div class="container-fluid">
           <h3 class="title">Thank you!</h3>
-          <h5 class="sub-title">--  Mai Lan & Xuân Trọng --</h5>
+          <h5 class="sub-title">--  Xuân Trọng & Mai Lan --</h5>
         </div>
       </section>
     </div>
@@ -480,7 +475,7 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
   
       var audio;
       var isPlaying = false;
-      
+  
       function initializeAudio() {
           audio = new Audio(biicore.bgMusic);
           audio.loop = true; // Đảm bảo âm thanh lặp lại
@@ -499,7 +494,7 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           if (!audio) {
               initializeAudio();
           }
-          
+  
           if (isPlaying) {
               audio.pause();
           } else {
@@ -522,13 +517,15 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           }
       }
   
-      // Xử lý sự kiện click để phát/tạm dừng nhạc
+      // Khởi tạo âm thanh khi người dùng nhấp vào trang
       document.body.addEventListener('click', function() {
+          if (!audio) {
+              initializeAudio();
+          }
           playPause();
-      });
-  </script>
+      }, { once: true }); // Đảm bảo sự kiện chỉ chạy một lần
   
-
+  </script>  
     <script src="js/1.js"></script>
     <script src="js/2.js"></script>
     <script src="js/3.js"></script>

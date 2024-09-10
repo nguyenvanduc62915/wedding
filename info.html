@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Mai Lan &#10084; Xuân Trọng</title>
+    <title>Xuân Trọng &#10084; Mai Lan</title>
     <link rel="icon" href="images/info/title.jpg" type="image/png">
     <link rel="stylesheet" type="text/css" href="assets/ap8/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
@@ -30,6 +30,28 @@
             font-weight: bold;
             margin: 5px 0;
         }
+        .date {
+            font-family: 'Brush Script MT', cursive; /* Bạn có thể thay đổi font nếu muốn */
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #f3ec78, #af4261, #f3ec78, #ff8c00, #1e90ff, #32cd32, #f3ec78);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: sparkle 10s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     </style>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,7 +75,7 @@
 	    		<div class="corner"><img src="images/corners.png" alt=""></div>
 	    	</div>
 	    	<div class="username">
-				Mai Lan  <span class="icon"><img src="images/and.png"></span> Xuân Trọng
+				Xuân Trọng  <span class="icon"><img src="images/and.png"></span> Mai Lan
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-xs-12">
