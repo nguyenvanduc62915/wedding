@@ -15,8 +15,34 @@
     <link rel="stylesheet" href="css/1.css" />
     <link rel="stylesheet" href="css/2.css" />
     <link href="css/3.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"> 
+    <style>
+      .countdown {
+  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
 
+#clock {
+  background: linear-gradient(90deg, #f3ec78, #af4261, #f3ec78, #ff8c00, #1e90ff, #32cd32, #f3ec78);
+  background-size: 200% 200%;
+  animation: gradientBG 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+    </style>
 </head>
 	<script type="text/javascript">
 		setTimeout(function(){ $(".loading").addClass("hide")}, 800);
