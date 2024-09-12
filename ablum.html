@@ -17,12 +17,24 @@
     <link href="css/3.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"> 
     <style>
-      .countdown {
-  font-family: Arial, sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-}
+   .playerIcon {
+        cursor: pointer;
+    }
 
+    #playerVolumeOff,
+    #playerVolumeOn {
+        width: 25px;
+        height: 27px;
+        display: inline;
+    }
+
+    #playerVolumeOn {
+        display: none; /* Hiển thị icon volume bật khi nhạc đang phát */
+    }
+
+    #playerVolumeOff {
+        display: inline; /* Hiển thị icon volume tắt khi nhạc đang dừng */
+    }
 #clock {
   background: linear-gradient(90deg, #f3ec78, #af4261, #f3ec78, #ff8c00, #1e90ff, #32cd32, #f3ec78);
   background-size: 200% 200%;
@@ -470,88 +482,100 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
 
     <div id="player" style="display: none;"></div>
     <script type="text/javascript">
-    const biicore = {
-    effect: JSON.parse('{"type":"custom","setting":{"icon":"https://cdn.biihappy.com/ziiweb/wedding-snows/22.png","number":"50","speed":"2","minSize":"20","maxSize":"40"}}'),
-    templatePremium: ('1' === '1'),
-    bgMusic: 'media.mp3',
-    autoMusic: true
-};
-
-let audio;
-let isPlaying = false;
-let isInitialized = false;
-
-function initializeAudio() {
-    if (!isInitialized) {
-        audio = new Audio(biicore.bgMusic);
-        audio.loop = true;
-        audio.volume = 0.5;
-
-        audio.addEventListener('canplaythrough', () => {
-            if (biicore.autoMusic && !isPlaying) {
-                playAudio();
-            }
-        });
-
-        audio.addEventListener('error', (e) => {
-            console.error('Audio error:', e);
-        });
-
-        isInitialized = true;
-    }
-}
-
-function playAudio() {
-    if (audio && audio.paused) {
-        audio.play().then(() => {
-            isPlaying = true;
-            console.log('Music resumed');
-        }).catch(error => {
-            console.error('Error resuming audio:', error);
-        });
-    }
-}
-
-function pauseAudio() {
-    if (audio && !audio.paused) {
-        audio.pause();
-        isPlaying = false;
-        console.log('Music paused');
-    }
-}
-
-function togglePlayPause() {
-    if (!audio) {
-        initializeAudio();
-    }
-
-    if (isPlaying) {
-        pauseAudio();
-    } else {
-        playAudio();
-    }
-}
-
-// Initialize audio on first interaction
-document.body.addEventListener('click', function() {
-    if (!isInitialized) {
-        initializeAudio();
-    }
-}, { once: true });
-
-// Add click event listener to volume icon
-document.addEventListener('DOMContentLoaded', () => {
-    const volumeIcon = document.querySelector('.bii-player-secondary, .playerIcon');
-    if (volumeIcon) {
-        volumeIcon.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent event from bubbling up to body
-            togglePlayPause();
-        });
-    } else {
-        console.error('Volume icon not found');
-    }
-});
-</script>
+      const biicore = {
+          effect: JSON.parse('{"type":"custom","setting":{"icon":"https://cdn.biihappy.com/ziiweb/wedding-snows/22.png","number":"50","speed":"2","minSize":"20","maxSize":"40"}}'),
+          templatePremium: ('1' === '1'),
+          bgMusic: 'media.mp3',
+          autoMusic: true
+      };
+  
+      let audio;
+      let isPlaying = false;
+      let isInitialized = false;
+  
+      function initializeAudio() {
+          if (!isInitialized) {
+              audio = new Audio(biicore.bgMusic);
+              audio.loop = true;
+              audio.volume = 0.5;
+  
+              audio.addEventListener('canplaythrough', () => {
+                  if (biicore.autoMusic && !isPlaying) {
+                      playAudio();
+                  }
+              });
+  
+              audio.addEventListener('error', (e) => {
+                  console.error('Audio error:', e);
+              });
+  
+              isInitialized = true;
+          }
+      }
+  
+      function playAudio() {
+          if (audio && audio.paused) {
+              audio.play().then(() => {
+                  isPlaying = true;
+                  console.log('Music resumed');
+                  updateVolumeIcon(); // Cập nhật icon khi nhạc phát
+              }).catch(error => {
+                  console.error('Error resuming audio:', error);
+              });
+          }
+      }
+  
+      function pauseAudio() {
+          if (audio && !audio.paused) {
+              audio.pause();
+              isPlaying = false;
+              console.log('Music paused');
+              updateVolumeIcon(); // Cập nhật icon khi nhạc dừng
+          }
+      }
+  
+      function togglePlayPause() {
+          if (!isInitialized) {
+              initializeAudio();
+          }
+  
+          if (isPlaying) {
+              pauseAudio();
+          } else {
+              playAudio();
+          }
+      }
+  
+      function updateVolumeIcon() {
+          const volumeIconOn = document.getElementById('playerVolumeOn');
+          const volumeIconOff = document.getElementById('playerVolumeOff');
+          if (volumeIconOn && volumeIconOff) {
+              if (isPlaying) {
+                  volumeIconOn.style.display = 'inline'; // Hiển thị icon volume bật
+                  volumeIconOff.style.display = 'none'; // Ẩn icon volume tắt
+              } else {
+                  volumeIconOn.style.display = 'none'; // Ẩn icon volume bật
+                  volumeIconOff.style.display = 'inline'; // Hiển thị icon volume tắt
+              }
+          }
+      }
+  
+      document.addEventListener('DOMContentLoaded', () => {
+          // Cập nhật icon khi trang tải
+          updateVolumeIcon();
+  
+          const volumeIcon = document.querySelector('.playerIcon');
+          if (volumeIcon) {
+              volumeIcon.addEventListener('click', function(event) {
+                  event.stopPropagation(); // Ngăn sự kiện nổi lên body
+                  togglePlayPause();
+              });
+          } else {
+              console.error('Volume icon not found');
+          }
+      });
+  </script>
+  
     <script src="js/1.js"></script>
     <script src="js/2.js"></script>
     <script src="js/3.js"></script>
