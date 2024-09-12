@@ -90,6 +90,53 @@
         
     </div>
     <script type="text/javascript">
+          // Danh sách các hình ảnh từ các trang khác cần được tải trước
+          var imagesToPreload = [
+            'images/info/1x',
+            'images/info/2x',
+            'images/info/3x',
+            'images/info/4x',
+            'images/info/5x',
+            'images/info/6x',
+            'images/info/7x',
+            'images/info/8x',
+            'images/info/9x',
+            'images/info/10x',
+            'images/info/anh.png',
+            'images/info/bg-title.png',
+            'images/info/lan.jpg',
+            'images/info/trong.jpg',
+            'images/info/title.jpg',
+            'images/and.png',
+            'images/avt.jpg',
+        ];
+
+        // Function để tải trước các hình ảnh
+        function preloadImages(images, callback) {
+            var loadedImages = 0;
+            var totalImages = images.length;
+            var imageElements = [];
+
+            for (var i = 0; i < images.length; i++) {
+                var img = new Image();
+                img.onload = function() {
+                    loadedImages++;
+                    if (loadedImages === totalImages && typeof callback === 'function') {
+                        callback();
+                    }
+                };
+                img.src = images[i];
+                imageElements.push(img);
+            }
+        }
+
+        // Khi tài liệu đã sẵn sàng, tải trước các hình ảnh
+        document.addEventListener('DOMContentLoaded', function() {
+            preloadImages(imagesToPreload, function() {
+                // Hình ảnh đã được tải xong
+                $(".loading").addClass("hide");
+            });
+        });
         setTimeout(function(){ $(".loading").addClass("hide")}, 1000);
     </script>
     <div class="box-invitation">
