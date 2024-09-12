@@ -469,29 +469,43 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
     </div>
 
     <div id="player" style="display: none;"></div>
-
     <script type="text/javascript">
       const biicore = {
           effect: JSON.parse('{"type":"custom","setting":{"icon":"https://cdn.biihappy.com/ziiweb/wedding-snows/22.png","number":"50","speed":"2","minSize":"20","maxSize":"40"}}'),
           templatePremium: ('1' === '1'),
-          bgMusic: 'media.mp3', // Thay đổi thành tệp âm thanh MP3
+          bgMusic: 'media.mp3', // Kiểm tra lại đường dẫn tệp âm thanh
           autoMusic: true
       };
   
       var audio;
       var isPlaying = false;
+      var isInitialized = false; // Theo dõi xem âm thanh đã được khởi tạo chưa
   
       function initializeAudio() {
-          audio = new Audio(biicore.bgMusic);
-          audio.loop = true; // Đảm bảo âm thanh lặp lại
-          audio.volume = 0; // Bắt đầu với âm lượng tắt
+          if (!isInitialized) {
+              audio = new Audio(biicore.bgMusic);
+              audio.loop = true; // Đảm bảo âm thanh lặp lại
+              audio.volume = 0.5; // Đặt âm lượng cố định (ví dụ 50%)
   
-          if (biicore.autoMusic) {
-              audio.play().then(() => {
-                  isPlaying = true;
-              }).catch(error => {
-                  console.error('Lỗi khi phát âm thanh:', error);
+              audio.addEventListener('canplaythrough', () => {
+                  if (biicore.autoMusic && !isPlaying) {
+                      audio.play().then(() => {
+                          isPlaying = true;
+                      }).catch(error => {
+                          console.error('Lỗi khi phát âm thanh:', error);
+                      });
+                  }
               });
+  
+              audio.addEventListener('error', (e) => {
+                  console.error('Lỗi âm thanh:', e); // Thông báo lỗi
+              });
+  
+              audio.addEventListener('ended', () => {
+                  isPlaying = false; // Đặt lại trạng thái khi âm thanh kết thúc
+              });
+  
+              isInitialized = true; // Đánh dấu rằng âm thanh đã được khởi tạo
           }
       }
   
@@ -501,36 +515,36 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           }
   
           if (isPlaying) {
-              audio.pause();
+              audio.pause(); // Tạm dừng âm thanh
+              isPlaying = false; // Đặt lại trạng thái
           } else {
               audio.play().then(() => {
-                  isPlaying = true;
+                  isPlaying = true; // Đặt trạng thái là đang phát
               }).catch(error => {
                   console.error('Lỗi khi phát âm thanh:', error);
               });
           }
-          isPlaying = !isPlaying;
       }
   
-      function toggleVolume() {
-          if (!audio) return;
-  
-          if (audio.volume === 0) {
-              audio.volume = 1; // Đặt âm lượng mặc định
-          } else {
-              audio.volume = 0; // Tắt âm lượng
-          }
-      }
-  
-      // Khởi tạo âm thanh khi người dùng nhấp vào trang
+      // Ngăn chặn việc nhấp nhiều lần gây lỗi
       document.body.addEventListener('click', function() {
-          if (!audio) {
+          if (!isInitialized) {
               initializeAudio();
           }
-          playPause();
+  
+          // Chỉ phát nhạc nếu chưa phát trước đó
+          if (!isPlaying) {
+              playPause(); // Phát âm thanh nếu chưa phát
+          }
       }, { once: true }); // Đảm bảo sự kiện chỉ chạy một lần
   
-  </script>  
+      // Ngăn chặn sự kiện click lặp lại trên các phần tử
+      document.querySelectorAll('.bii-player-secondary, .playerIcon').forEach((element) => {
+          element.addEventListener('click', function(event) {
+              event.stopPropagation(); // Ngăn chặn sự kiện click truyền lên body
+          });
+      });
+  </script>
     <script src="js/1.js"></script>
     <script src="js/2.js"></script>
     <script src="js/3.js"></script>
