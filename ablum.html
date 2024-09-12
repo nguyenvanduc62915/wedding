@@ -470,81 +470,88 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
 
     <div id="player" style="display: none;"></div>
     <script type="text/javascript">
-      const biicore = {
-          effect: JSON.parse('{"type":"custom","setting":{"icon":"https://cdn.biihappy.com/ziiweb/wedding-snows/22.png","number":"50","speed":"2","minSize":"20","maxSize":"40"}}'),
-          templatePremium: ('1' === '1'),
-          bgMusic: 'media.mp3', // Kiểm tra lại đường dẫn tệp âm thanh
-          autoMusic: true
-      };
-  
-      var audio;
-      var isPlaying = false;
-      var isInitialized = false; // Theo dõi xem âm thanh đã được khởi tạo chưa
-  
-      function initializeAudio() {
-          if (!isInitialized) {
-              audio = new Audio(biicore.bgMusic);
-              audio.loop = true; // Đảm bảo âm thanh lặp lại
-              audio.volume = 0.5; // Đặt âm lượng cố định (ví dụ 50%)
-  
-              audio.addEventListener('canplaythrough', () => {
-                  if (biicore.autoMusic && !isPlaying) {
-                      audio.play().then(() => {
-                          isPlaying = true;
-                      }).catch(error => {
-                          console.error('Lỗi khi phát âm thanh:', error);
-                      });
-                  }
-              });
-  
-              audio.addEventListener('error', (e) => {
-                  console.error('Lỗi âm thanh:', e); // Thông báo lỗi
-              });
-  
-              audio.addEventListener('ended', () => {
-                  isPlaying = false; // Đặt lại trạng thái khi âm thanh kết thúc
-              });
-  
-              isInitialized = true; // Đánh dấu rằng âm thanh đã được khởi tạo
-          }
-      }
-  
-      function playPause() {
-          if (!audio) {
-              initializeAudio();
-          }
-  
-          if (isPlaying) {
-              audio.pause(); // Tạm dừng âm thanh
-              isPlaying = false; // Đặt lại trạng thái
-          } else {
-              audio.play().then(() => {
-                  isPlaying = true; // Đặt trạng thái là đang phát
-              }).catch(error => {
-                  console.error('Lỗi khi phát âm thanh:', error);
-              });
-          }
-      }
-  
-      // Ngăn chặn việc nhấp nhiều lần gây lỗi
-      document.body.addEventListener('click', function() {
-          if (!isInitialized) {
-              initializeAudio();
-          }
-  
-          // Chỉ phát nhạc nếu chưa phát trước đó
-          if (!isPlaying) {
-              playPause(); // Phát âm thanh nếu chưa phát
-          }
-      }, { once: true }); // Đảm bảo sự kiện chỉ chạy một lần
-  
-      // Ngăn chặn sự kiện click lặp lại trên các phần tử
-      document.querySelectorAll('.bii-player-secondary, .playerIcon').forEach((element) => {
-          element.addEventListener('click', function(event) {
-              event.stopPropagation(); // Ngăn chặn sự kiện click truyền lên body
-          });
-      });
-  </script>
+    const biicore = {
+    effect: JSON.parse('{"type":"custom","setting":{"icon":"https://cdn.biihappy.com/ziiweb/wedding-snows/22.png","number":"50","speed":"2","minSize":"20","maxSize":"40"}}'),
+    templatePremium: ('1' === '1'),
+    bgMusic: 'media.mp3',
+    autoMusic: true
+};
+
+let audio;
+let isPlaying = false;
+let isInitialized = false;
+
+function initializeAudio() {
+    if (!isInitialized) {
+        audio = new Audio(biicore.bgMusic);
+        audio.loop = true;
+        audio.volume = 0.5;
+
+        audio.addEventListener('canplaythrough', () => {
+            if (biicore.autoMusic && !isPlaying) {
+                playAudio();
+            }
+        });
+
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+        });
+
+        isInitialized = true;
+    }
+}
+
+function playAudio() {
+    if (audio && audio.paused) {
+        audio.play().then(() => {
+            isPlaying = true;
+            console.log('Music resumed');
+        }).catch(error => {
+            console.error('Error resuming audio:', error);
+        });
+    }
+}
+
+function pauseAudio() {
+    if (audio && !audio.paused) {
+        audio.pause();
+        isPlaying = false;
+        console.log('Music paused');
+    }
+}
+
+function togglePlayPause() {
+    if (!audio) {
+        initializeAudio();
+    }
+
+    if (isPlaying) {
+        pauseAudio();
+    } else {
+        playAudio();
+    }
+}
+
+// Initialize audio on first interaction
+document.body.addEventListener('click', function() {
+    if (!isInitialized) {
+        initializeAudio();
+    }
+}, { once: true });
+
+// Add click event listener to volume icon
+document.addEventListener('DOMContentLoaded', () => {
+    const volumeIcon = document.querySelector('.bii-player-secondary, .playerIcon');
+    if (volumeIcon) {
+        volumeIcon.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent event from bubbling up to body
+            togglePlayPause();
+        });
+    } else {
+        console.error('Volume icon not found');
+    }
+});
+</script>
     <script src="js/1.js"></script>
     <script src="js/2.js"></script>
     <script src="js/3.js"></script>
