@@ -62,7 +62,7 @@ window.onload = (event) =>{
 			document.querySelector('.mouse-scroll-on-mobile').style.visibility ="hidden";
 		}		
 	});
-	var scrollDownText = (typeof biicore.scroll_down_text != 'undefined' && biicore.scroll_down_text !== '') ? biicore.scroll_down_text : 'Từ từ đợi Bot 5 phút';
+	var scrollDownText = (typeof biicore.scroll_down_text != 'undefined' && biicore.scroll_down_text !== '') ? biicore.scroll_down_text : 'Cùng Trọng với Lan đợi 3p rồi lướt xuống nhé ❤️';
 	document.write(` 
 	<style type="text/css">
 .mouse-scroll-on-mobile{display:none;}
@@ -110,6 +110,7 @@ window.onload = (event) =>{
 }
 @-webkit-keyframes arrow{0%{bottom:0}100%{bottom:40px}}
 </style>
+
 	`)
 if(biicore.alert && Object.keys(biicore.alert).length > 0 && biicore.alert.status == 1) {
 	setTimeout(function(){
