@@ -226,9 +226,6 @@ if(biicore.bgMusic){
 	}
 	</style>
 	<div class="bii-player">
-    <div onclick="togglePlayPause();" class="bii-player-secondary">
-        <div class="bii-player-secondary-content"></div>
-    </div>
     <div onclick="toggleVolume();" class="playerIcon">
         <span id="playerVolumeOff">
             <!-- Volume Off Icon -->

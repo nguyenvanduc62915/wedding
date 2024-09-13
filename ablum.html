@@ -314,10 +314,10 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           if (audio && audio.paused) {
               audio.play().then(() => {
                   isPlaying = true;
-                  console.log('Music resumed');
+                  console.log('Music playing');
                   updateVolumeIcon();
               }).catch(error => {
-                  console.error('Error resuming audio:', error);
+                  console.error('Error playing audio:', error);
               });
           }
       }
@@ -358,8 +358,12 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
       }
   
       document.addEventListener('DOMContentLoaded', () => {
-          // Cập nhật icon khi trang tải
-          updateVolumeIcon();
+          initializeAudio(); // Khởi tạo âm thanh ngay khi trang tải
+  
+          // Phát nhạc nếu autoMusic là true
+          if (biicore.autoMusic) {
+              playAudio();
+          }
   
           const volumeIcon = document.querySelector('.playerIcon');
           if (volumeIcon) {
@@ -372,6 +376,7 @@ Một lần nữa chân thành cảm ơn tất cả các bạn!
           }
       });
   </script>
+  
     <script src="js/2.js"></script>
     <script src="js/3.js"></script>
   </body>
