@@ -62,26 +62,54 @@ window.onload = (event) =>{
 			document.querySelector('.mouse-scroll-on-mobile').style.visibility ="hidden";
 		}		
 	});
-	var scrollDownText = (typeof biicore.scroll_down_text != 'undefined' && biicore.scroll_down_text !== '') ? biicore.scroll_down_text : 'Kéo xuống từ từ :))';
+	var scrollDownText = (typeof biicore.scroll_down_text != 'undefined' && biicore.scroll_down_text !== '') ? biicore.scroll_down_text : 'Từ từ đợi Bot 5 phút';
 	document.write(` 
-	<style type=text/css>
-	.mouse-scroll-on-mobile{display:none;}
-	@media screen and (max-width: 576px){
-		.mouse-scroll-on-mobile{width:95px;height:30px;margin:0 0 0 -30px;position:fixed;right:calc(50% - 52px);bottom:80px;-webkit-animation:arrow .5s 1s infinite ease-in-out alternate;z-index:999;display:block!important;visibility:hidden}
-		.mouse-scroll-on-mobile:hover{-webkit-animation-play-state:paused}
-		.mouse-scroll-on-mobile .mouse-scroll-on-mobile-text{text-align:center;bottom:120px;position:absolute;left:1px;background:#fff;padding:5px 10px;border-radius:3px;font-size:15px;color: #000;}
-		.mouse-scroll-on-mobile .mouse-scroll-on-mobile-left{position:absolute;height:5px;width:30px;background:#de4659;-webkit-transform:rotate(240deg);bottom:80px;left:42px;-webkit-border-radius:4px;-webkit-transform-origin:5px 50%;-webkit-animation:leftArrow .5s 1s infinite ease-out alternate}
-		.mouse-scroll-on-mobile .mouse-scroll-on-mobile-right{position:absolute;height:5px;width:30px;background:#de4659;-webkit-transform:rotate(-60deg);bottom:80px;left:46px;-webkit-border-radius:4px;-webkit-transform-origin:5px 50%;-webkit-animation:rightArrow .5s 1s infinite ease-out alternate}}
-		@-webkit-keyframes arrow{0%{bottom:0}100%{bottom:40px}}
-		@-webkit-keyframes leftArrow{100%{-webkit-transform:rotate(225deg)}}
-		@-webkit-keyframes rightArrow{100%{-webkit-transform:rotate(-45deg)}}
-	</style>
-	<div class="mouse-scroll-on-mobile">
-		<div class="mouse-scroll-on-mobile-text">${scrollDownText}</div>
-		<div class="mouse-scroll-on-mobile-left"></div>
-		<div class="mouse-scroll-on-mobile-right"></div>
-	</div>
-
+	<style type="text/css">
+.mouse-scroll-on-mobile{display:none;}
+@media screen and (max-width: 576px){
+    .mouse-scroll-on-mobile{width:95px;height:95px;margin:0 0 0 -30px;position:fixed;right:calc(50% - 52px);bottom:80px;-webkit-animation:arrow .5s 1s infinite ease-in-out alternate;z-index:999;display:block!important;visibility:hidden}
+    .mouse-scroll-on-mobile:hover{-webkit-animation-play-state:paused}
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-text{text-align:center;bottom:120px;position:absolute;left:1px;background:#fff;padding:5px 10px;border-radius:3px;font-size:15px;color: #000;}
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-left,
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-right{
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 40px solid #de4659;
+        border-radius: 50%;
+    }
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-left {
+        left: 40px;
+        transform: rotate(-45deg);
+    }
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-right {
+        left: 70px;
+        transform: rotate(45deg);
+    }
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-left::before,
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-right::before {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #de4659;
+        top: -20px;
+        left: 0;
+    }
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-left::before {
+        left: 10px;
+        transform: rotate(45deg);
+    }
+    .mouse-scroll-on-mobile .mouse-scroll-on-mobile-right::before {
+        left: -10px;
+        transform: rotate(-45deg);
+    }
+}
+@-webkit-keyframes arrow{0%{bottom:0}100%{bottom:40px}}
+</style>
 	`)
 if(biicore.alert && Object.keys(biicore.alert).length > 0 && biicore.alert.status == 1) {
 	setTimeout(function(){
