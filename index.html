@@ -90,34 +90,48 @@
         
     </div>
     <script type="text/javascript">
-     function preloadImagesSequentially(images, callback) {
-        var currentImageIndex = 0;
-        var totalImages = images.length;
-
-        function loadNextImage() {
-            if (currentImageIndex >= totalImages) {
-                if (typeof callback === 'function') {
-                    callback();
+        function preloadImagesSequentially(images, callback) {
+            let currentImageIndex = 0;
+            const totalImages = images.length;
+    
+            function loadNextImage() {
+                if (currentImageIndex >= totalImages) {
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                    return;
                 }
-                return;
+    
+                const img = new Image();
+                img.onload = function() {
+                    currentImageIndex++;
+                    loadNextImage(); 
+                };
+                img.onerror = function() {
+                    console.error('Failed to load image:', images[currentImageIndex]);
+                    currentImageIndex++;
+                    loadNextImage(); 
+                };
+                img.src = images[currentImageIndex];
             }
-
-            var img = new Image();
-            img.onload = function() {
-                currentImageIndex++;
-                loadNextImage(); 
-            };
-            img.src = images[currentImageIndex];
+    
+            loadNextImage(); 
         }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            const imagesToPreload = [
+                'wedding/images/anh.png',
+                'wedding/images/1x.jpg',
+                'wedding/images/2x.jpg',
+                'wedding/images/3x.jpg',
+                'wedding/images/4x.jpg',
 
-        loadNextImage(); 
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        preloadImagesSequentially(imagesToPreload, function() {
-            $(".loading").addClass("hide");
+            ];
+    
+            preloadImagesSequentially(imagesToPreload, function() {
+                $(".loading").addClass("hide");
+            });
         });
-    });
         setTimeout(function(){ $(".loading").addClass("hide")}, 1000);
     </script>
     <div class="box-invitation">
@@ -142,11 +156,52 @@
     	</div>
     	<div class="bottom">Trân trọng kính mời</div>
         <script type="text/javascript">
-            $(window).bind('mousewheel DOMMouseScroll', function(event){
-                if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
+            function preloadImagesSequentially(images, callback) {
+                let currentImageIndex = 0;
+                const totalImages = images.length;
+        
+                function loadNextImage() {
+                    if (currentImageIndex >= totalImages) {
+                        if (typeof callback === 'function') {
+                            callback();
+                        }
+                        return;
+                    }
+        
+                    const img = new Image();
+                    img.onload = function() {
+                        currentImageIndex++;
+                        loadNextImage(); 
+                    };
+                    img.onerror = function() {
+                        console.error('Failed to load image:', images[currentImageIndex]);
+                        currentImageIndex++;
+                        loadNextImage(); 
+                    };
+                    img.src = images[currentImageIndex];
                 }
-                else {
-                    window.location.href="info.html";
+        
+                loadNextImage(); 
+            }
+        
+            document.addEventListener('DOMContentLoaded', function() {
+                const imagesToPreload = [
+                    'wedding/images/anh.png',
+                    'wedding/images/1x.jpg',
+                    'wedding/images/2x.jpg',
+                    'wedding/images/3x.jpg',
+                    'wedding/images/4x.jpg',
+                ];
+        
+                preloadImagesSequentially(imagesToPreload, function() {
+                    $("#loading").addClass("hide");
+                });
+            });
+
+            // Điều hướng khi cuộn chuột xuống
+            $(window).bind('mousewheel DOMMouseScroll', function(event){
+                if (event.originalEvent.wheelDelta <= 0 || event.originalEvent.detail > 0) {
+                    window.location.href = "info.html";
                 }
             });
         </script>
