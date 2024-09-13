@@ -84,8 +84,12 @@
         <div class="main_area p-3">
           <div class="main_image_area pt-4 pb-8" data-aos="fade-up" data-aos-delay="50">
             <div class="main_image">
-                <img src="images/info/anh.png" ref="preload">
-            </div>
+              <picture>
+                  <source srcset="images/info/anh-small.webp" media="(max-width: 600px)">
+                  <source srcset="images/info/anh-medium.webp" media="(max-width: 1200px)">
+                  <img src="images/info/anh.webp" alt="Main Image">
+              </picture>
+          </div>          
               <img class="bg-title" src="images/info/bg-title.png" ref="preload" alt="" />
             <div class="wrap-name pt-7 px-5 title">
               Xuân Trọng <small>&amp;</small> Mai Lan
@@ -117,79 +121,123 @@
           </div>
         </section>
 
-                <section class="py-5 story-section section-bg-affect" id="story">
-            <div class="container-fluid">
-                <div class="story-content">
-                    <div class="timeline">
-                        <div class="outer">
-                            <div class="timeline-card" data-aos="fade-right">
-                                <div class="info">
-                                    <div class="img-holder">
-                                        <img src="images/info/1x.jpg" alt="" />
-                                    </div>
-                                </div>
-                                <div class="info">
-                                    <span class="date"></span>
-                                    <div class="img-holder">
-                                        <img src="images/info/2x.jpg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                                                        <div class="timeline-card" data-aos="fade-left">
-                                <div class="info">
-                                    <div class="img-holder">
-                                        <img src="images/info/3x.jpg" alt="" />
-                                    </div>
-                                </div>
-                                <div class="info">
-                                  <span class="date"></span>
-                                  <div class="img-holder">
-                                      <img src="images/info/4x.jpg" alt="" />
-                                  </div>
-                              </div>
-                          </div>
-                                <div class="timeline-card" data-aos="fade-left">
+        <section class="py-5 story-section section-bg-affect" id="story">
+          <div class="container-fluid">
+              <div class="story-content">
+                  <div class="timeline">
+                      <div class="outer">
+                          <div class="timeline-card" data-aos="fade-right">
                               <div class="info">
                                   <div class="img-holder">
-                                      <img src="images/info/5x.jpg" alt="" />
+                                      <picture>
+                                          <source srcset="images/info/1x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/1x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/1x.jpg" alt="" />
+                                      </picture>
                                   </div>
-                                  <div class="info">
-                                    <div class="img-holder">
-                                        <img src="images/info/6x.jpg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                          <div class="timeline-card" data-aos="fade-left">
-                            <div class="info">
-                                <div class="img-holder">
-                                    <img src="images/info/7x.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="info">
-                              <span class="date"></span>
-                              <div class="img-holder">
-                                  <img src="images/info/8x.jpg" alt="" />
+                              </div>
+                              <div class="info">
+                                  <span class="date"></span>
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/2x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/2x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/2x.jpg" alt="" />
+                                      </picture>
+                                  </div>
                               </div>
                           </div>
-                      </div>
-                      <div class="timeline-card" data-aos="fade-left">
-                        <div class="info">
-                            <div class="img-holder">
-                                <img src="images/info/9x.jpg" alt="" />
-                            </div>
-                        </div>
-                        <div class="info">
-                          <span class="date"></span>
-                          <div class="img-holder">
-                              <img src="images/info/10x.jpg" alt="" />
+                          <div class="timeline-card" data-aos="fade-left">
+                              <div class="info">
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/3x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/3x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/3x.jpg" alt="" />
+                                      </picture>
+                                  </div>
+                              </div>
+                              <div class="info">
+                                  <span class="date"></span>
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/4x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/4x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/4x.jpg" alt="" />
+                                      </picture>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="timeline-card" data-aos="fade-left">
+                              <div class="info">
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/5x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/5x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/5x.jpg" alt="" />
+                                      </picture>
+                                  </div>
+                              </div>
+                              <div class="info">
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/6x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/6x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/6x.jpg" alt="" />
+                                      </picture>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="timeline-card" data-aos="fade-left">
+                              <div class="info">
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/7x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/7x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/7x.jpg" alt="" />
+                                      </picture>
+                                  </div>
+                              </div>
+                              <div class="info">
+                                  <span class="date"></span>
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/8x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/8x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/8x.jpg" alt="" />
+                                      </picture>
+                                  </div>
+                              </div>
+                          </div>
+      
+                          <!-- Timeline Card 5 -->
+                          <div class="timeline-card" data-aos="fade-left">
+                              <div class="info">
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/9x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/9x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/9x.jpg" alt="" />
+                                      </picture>
+                                  </div>
+                              </div>
+                              <div class="info">
+                                  <span class="date"></span>
+                                  <div class="img-holder">
+                                      <picture>
+                                          <source srcset="images/info/10x-small.webp" media="(max-width: 600px)">
+                                          <source srcset="images/info/10x-medium.webp" media="(max-width: 1200px)">
+                                          <img src="images/info/10x.jpg" alt="" />
+                                      </picture>
+                                  </div>
+                              </div>
                           </div>
                       </div>
                   </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+              </div>
+          </div>
+      </section>
+      
         
         <section class="py-5 invitation-section section-bg-affect" id="invitation">
           <div class="container-fluid">
